@@ -1,0 +1,24 @@
+# data
+data/
+*.csv
+*.gz
+*.npy
+*.pkl
+
+# models
+models/
+*.pth
+
+# python
+__pycache__/
+*.pyc
+
+# env
+.env
+venv/
+
+# vscode
+.vscode/
+
+# notebook checkpoints
+.ipynb_checkpoints/
