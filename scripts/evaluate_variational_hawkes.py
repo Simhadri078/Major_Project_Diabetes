@@ -12,6 +12,11 @@ with open("data/processed/events.pkl", "rb") as f:
 
 print("Total available patients:", len(events))
 
+# Debug info
+sample_keys = list(events.keys())[:5]
+print("Sample patient IDs:", sample_keys)
+print("Type of patient IDs:", type(sample_keys[0]))
+
 
 # -----------------------------
 # Model Definition (must match training)
@@ -88,10 +93,23 @@ print("\nModel loaded successfully.\n")
 # Interactive Patient Prediction
 # =====================================================
 
-patient_id = input("Enter patient ID: ")
+patient_id_input = input("Enter patient ID: ")
+
+# Handle both int and string keys automatically
+sample_key = list(events.keys())[0]
+
+try:
+    if isinstance(sample_key, int):
+        patient_id = int(patient_id_input)
+    else:
+        patient_id = patient_id_input
+except:
+    print("Invalid patient ID format.")
+    exit()
 
 if patient_id not in events:
     print("Patient ID not found.")
+    print("Try one of these IDs:", list(events.keys())[:10])
     exit()
 
 seq = events[patient_id]
